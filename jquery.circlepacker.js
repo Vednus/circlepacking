@@ -17,6 +17,7 @@
     	var centerX = container.width()/2;
     	var centerY = container.height()/2;
 
+
     	//array for holding circles
     	var circAR = new Array();
 
@@ -31,6 +32,7 @@
     	var damping = 0.1;
 
     	var i = 0;
+
     	circles.each(function() {
     		if(i%2 == 0)
     		{
@@ -46,7 +48,7 @@
     		})
     		$(this).data('xPos',l);
     		$(this).data('yPos',t);
-    		var r = $(this).data('width')/2+3;
+    		var r = $(this).width()/2+3;
     		$(this).data('radius',r);
     		circAR.push($(this));
     		i++;
@@ -107,7 +109,7 @@
 	      }
 
 	      //space
-	      damping*=0.98;
+	      damping*=.98;
 
 	      //push toward center
 	      for(var i=0;i<circles.length;i++)

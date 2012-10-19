@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<style>
+			#circles-holder {
+				background:#000;
+				width:800px;
+				height:600px;
+			}
+
+			.circle {
+				background-color: #00f;
+				border:1px solid #ccc;
+				position:absolute;
+			}
+		</style>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="jquery.circlepacker.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				//circle content positioning
+				$('.circle').each(function() {
+					var $c = $(this);
+
+					//create size of circle via random number
+					var size = Math.round(Math.random()*50+20);
+					//
+					//$c.data('width',size);
+					$c.css({
+						'width':size,
+						'height':size,
+						'margin-left':-1*size/2,
+						'margin-top':-1*size/2,
+						borderRadius:size/2
+					})
+				})
+
+				//pack circles
+				$('#circles-holder').circlePacker($('.circle'));
+
+			})
+		</script>
+
+	</head>
+	<body>
+		<div id='circles-holder'>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+			<div class='circle'></div>
+		</div>
+	</body>
+</html>
