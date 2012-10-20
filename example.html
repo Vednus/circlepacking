@@ -32,12 +32,10 @@
 				//CREATE CIRCLES
 				//circle content position and size
 				$('.circle').each(function() {
-					//ref to circle
-					var $c = $(this);
 					//create size of circle via random number
 					var size = Math.round(Math.random()*50+20);
 					//create randomly sized circles from divs
-					$c.css({
+					$(this).css({
 						'width':size,
 						'height':size,
 						'margin-left':-1*size/2,
