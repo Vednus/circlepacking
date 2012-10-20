@@ -139,7 +139,7 @@
 	      {
 	      	//call callback function
 	      	if (typeof settings.callback == 'function') { // make sure the callback is a function
-		        settings.callback.call(this); // brings the scope to the callback
+		        settings.callback.call(container,container); // brings the scope to the callback
 			    }
 	      } else
 	      {
