@@ -5,8 +5,8 @@
      // Create some defaults, extending them with any options that were provided
     var settings = $.extend( {
       'damping' : 0.1,
-      'dampingAccel' : 0.95,
-      'dampingCutoff' : 0.010,
+      'dampingAccel' : 0.98,
+      'dampingCutoff' : 0.007,
     }, options);
    
 
@@ -23,7 +23,7 @@
     	var circAR = new Array();
 
 
-    	//for jquery loop
+    	//jquery loop for positioning initially and setting data for top and left
     	var i = 0;
     	circles.each(function() {
     		if(i%2 == 0)

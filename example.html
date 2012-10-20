@@ -17,7 +17,7 @@
 
 			.circle {
 				background:rgba(0,70,255,1);
-				border:1px solid #666;
+				border:1px solid rgba(0,70,255,1);
 				position:absolute;
 			}
 		</style>
@@ -27,33 +27,37 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 
-				//circle content positioning
-				$('.circle').each(function() {
-					var $c = $(this);
+				//
+				//CREATE CIRCLES
 
+				//circle content position and size
+				$('.circle').each(function() {
+					//ref to circle
+					var $c = $(this);
 					//create size of circle via random number
 					var size = Math.round(Math.random()*50+20);
-					//
-					//$c.data('width',size);
+					//create randomly sized circles from divs
 					$c.css({
 						'width':size,
 						'height':size,
 						'margin-left':-1*size/2,
 						'margin-top':-1*size/2,
-						borderRadius:size/2
+						borderRadius:size/2+1
 					})
 				})
 
-				//pack circles
-				//first param holds the jQuery object of circle elements
-				//second param holds the settings
+				//
+				//PACK CIRCLES
+
+				//1st PARAM: holds the jQuery object of circle elements
+				//2nd PARAM: holds the settings
 				$('#circles-holder').circlePacker($('.circle'),{
 					'damping':0.1,	//amount to move during iterations
 		      'dampingAccel' : 0.95,	//How quickly should it come to a stop
 		      'dampingCutoff' : 0.010,	//for quicker stopping (less accuracy),
 		      'callback' : function(circleHolder) {
 		      	//$circleHolder is reference back to holder
-		      	console.log('Finished Packing Circles: '+circleHolder.html());
+		      	console.log('Finished Packing '+circleHolder.children().length+' Circles');
 		      }
 				});
 
