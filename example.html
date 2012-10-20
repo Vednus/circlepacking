@@ -55,12 +55,12 @@
 				//2nd PARAM: holds the settings
 				$('#circles-holder').circlePacker($('.circle'),{
 					'damping':0.1,	//amount to move during iterations
-		      'dampingAccel' : 0.95,	//How quickly should it come to a stop
-		      'dampingCutoff' : 0.010,	//for quicker stopping (less accuracy),
-		      'callback' : function(circleHolder) {
-		      	//$circleHolder is reference back to holder
-		      	console.log('Finished Packing '+circleHolder.children().length+' Circles');
-		      }
+					'dampingAccel' : 0.95,	//How quickly should it come to a stop
+					'dampingCutoff' : 0.010,	//for quicker stopping (less accuracy),
+					'callback' : function(circleHolder) {
+						//circleHolder is reference back to holder
+						console.log('Finished Packing '+circleHolder.children().length+' Circles');
+					}
 				});
 
 			})
