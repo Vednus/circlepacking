@@ -16,9 +16,10 @@
 			}
 
 			.circle {
-				background:rgba(0,70,255,.8);
+				background:rgba(0,70,255,.6);
 				border:1px solid rgba(0,70,255,1);
 				position:absolute;
+				box-shadow: 0 0 35px #000;
 			}
 		</style>
 
@@ -42,7 +43,8 @@
 						'height':size,
 						'margin-left':-1*size/2,
 						'margin-top':-1*size/2,
-						borderRadius:size/2+1
+						borderRadius:size/2+1,
+						zIndex:size
 					})
 				})
 
