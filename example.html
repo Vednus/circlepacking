@@ -45,7 +45,13 @@
 				})
 
 				//pack circles
-				$('#circles-holder').circlePacker($('.circle'));
+				//first param holds the jQuery object of circle elements
+				//second param holds the settings
+				$('#circles-holder').circlePacker($('.circle'),{
+					'damping':0.1,	//amount to move during iterations
+		      'dampingAccel' : 0.95,	//How quickly should it come to a stop
+		      'dampingCutoff' : 0.010,	//for quicker stopping (less accuracy)
+				});
 
 			})
 		</script>

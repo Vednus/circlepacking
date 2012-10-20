@@ -1,38 +1,30 @@
 (function( $ ){
 
-  $.fn.circlePacker = function(circles) {  
+  $.fn.circlePacker = function(circles,options) {  
 
-    
+     // Create some defaults, extending them with any options that were provided
+    var settings = $.extend( {
+      'damping' : 0.1,
+      'dampingAccel' : 0.95,
+      'dampingCutoff' : 0.010,
+    }, options);
    
 
     return this.each(function() { 
 
-
+    	//reference to (this) holder of circles
     	var container = $(this);
-
-    	//sort circles on distance to center
-
 
     	//center of container
     	var centerX = container.width()/2;
     	var centerY = container.height()/2;
 
-
     	//array for holding circles
     	var circAR = new Array();
 
-    	//iterated circles
-    	var ci;
-    	var cj;
 
-    	//vector object 
-    	var v = {};
-
-    	var iterator = 1;
-    	var damping = 0.1;
-
+    	//for jquery loop
     	var i = 0;
-
     	circles.each(function() {
     		if(i%2 == 0)
     		{
@@ -53,11 +45,22 @@
     		circAR.push($(this));
     		i++;
     	})
+
     	//reassign array for circles
     	circles = circAR;
 
     	circles = circles.sort(sortFromCenter);
     	var packCircles = function() {
+
+	    	//iterated circle local insance
+	    	var ci;
+	    	var cj;
+	    	//vector object
+	    	var v;
+	    	var dx;
+	    	var dy;
+	    	var r;
+	    	var d;
 
 
 	      //push away from each other
@@ -74,10 +77,13 @@
 	      			continue;
 	      		}
 
-	      		var dx = cj.data('xPos')-ci.data('xPos');
-	      		var dy = cj.data('yPos')-ci.data('yPos');
-	      		var r = ci.data('radius') + cj.data('radius');
-	      		var d = (dx*dx) + (dy*dy);
+			    	//vector object
+			    	v = {};
+	      		dx = cj.data('xPos')-ci.data('xPos');
+	      		dy = cj.data('yPos')-ci.data('yPos');
+	      		r = ci.data('radius') + cj.data('radius');
+	      		d = (dx*dx) + (dy*dy);
+
 	      		if(d < ((r*r)-0.01))
 	      		{
 	      			v.x = dx;
@@ -108,15 +114,15 @@
 
 	      }
 
-	      //space
-	      damping*=.98;
+	      //deceleration for number of tries
+	      settings.damping*=settings.dampingAccel;
 
 	      //push toward center
 	      for(var i=0;i<circles.length;i++)
 	      {
 	      	var c = circles[i];
-	      	var x = (c.data('xPos') - centerX)*damping;
-	      	var y = (c.data('yPos') - centerY)*damping;
+	      	var x = (c.data('xPos') - centerX)*settings.damping;
+	      	var y = (c.data('yPos') - centerY)*settings.damping;
 
 	      	var l = Math.max(c.data('xPos')-x,c.data('radius'));
 	      	var t = Math.max(c.data('yPos')-y,c.data('radius'));
@@ -125,8 +131,7 @@
     			c.data('yPos',t); 
 	      }
 
-	      iterator++;
-	      if(damping < 0.007)
+	      if(settings.damping < settings.dampingCutoff)
 	      {
 	      	container.delay(300).fadeTo(300,1);
 	      } else
