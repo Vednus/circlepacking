@@ -49,7 +49,10 @@
     	//reassign array for circles
     	circles = circAR;
 
+    	//sort array by distance from center
     	circles = circles.sort(sortFromCenter);
+
+    	//iterated on 
     	var packCircles = function() {
 
 	    	//iterated circle local insance
@@ -77,12 +80,16 @@
 	      			continue;
 	      		}
 
-			    	//vector object
+	      		//vars 
 			    	v = {};
 	      		dx = cj.data('xPos')-ci.data('xPos');
 	      		dy = cj.data('yPos')-ci.data('yPos');
 	      		r = ci.data('radius') + cj.data('radius');
 	      		d = (dx*dx) + (dy*dy);
+	      		var length;
+	      		var scale;
+	      		var l;
+	      		var t;
 
 	      		if(d < ((r*r)-0.01))
 	      		{
@@ -97,17 +104,14 @@
 	      			v.x*=scale;
 	      			v.y*=scale;
 
-	      			var l = ci.data('xPos') - v.x;
-	      			var t = ci.data('yPos') - v.y;
+	      			l = ci.data('xPos') - v.x;
+	      			t = ci.data('yPos') - v.y;
+
+	      			//move circle to new position
 	      			ci.css({'top':t,'left':l});
 	      			ci.data('xPos',l);
 	      			ci.data('yPos',t);
-
-	      			var l = cj.data('xPos') + v.x;
-	      			var t = cj.data('yPos') + v.y;
-	      			cj.css({'top':t,'left':l}); 
-	      			cj.data('xPos',l);
-	      			cj.data('yPos',t);     			
+     			
 
 	      		}
 	      	}
@@ -133,7 +137,10 @@
 
 	      if(settings.damping < settings.dampingCutoff)
 	      {
-	      	container.delay(300).fadeTo(300,1);
+	      	//call callback function
+	      	if (typeof settings.callback == 'function') { // make sure the callback is a function
+		        settings.callback.call(this); // brings the scope to the callback
+			    }
 	      } else
 	      {
 	      	setTimeout(packCircles,10)
